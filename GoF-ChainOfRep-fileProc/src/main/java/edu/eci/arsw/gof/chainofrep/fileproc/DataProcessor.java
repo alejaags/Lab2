@@ -19,19 +19,19 @@ public class DataProcessor{
     public void loadAndProcessData(String fileName) throws DataLoadException{
         
         LOG.info("Loading data...");
-        
+        DataProcessor dp = null;
         
         if (extension(fileName).equals("xml")){
-            processXML(fileName);                
+            dp = new DataProcessorXML(fileName);     
         }
         else if (extension(fileName).equals("csv")){
-            processCSV(fileName);                
+            dp = new DataProcessorCSV(fileName);       
         }
         else if (extension(fileName).equals("json")){
-            processJSON(fileName);                
+           dp = new DataProcessorJSON(fileName);                  
         }
         else if (extension(fileName).equals("txt")){
-            processTXT(fileName);                
+          dp = new DataProcessorTXT(fileName);                
         }
         else{
             throw new DataLoadException("Format not supported:"+extension(fileName));
@@ -48,24 +48,8 @@ public class DataProcessor{
         return FilenameUtils.getExtension(fileName);
     }
     
-    private static final Logger LOG = Logger.getLogger(DataProcessor.class.getName());
+    static final Logger LOG = Logger.getLogger(DataProcessor.class.getName());
     
-    private void processCSV(String fileName) {
-        LOG.info("Processing CVS...");
-    }
-
-    private void processJSON(String fileName) {
-        LOG.info("Processing JSON file...");
-    }
-
-    private void processXML(String fileName) {
-        LOG.info("Processing XML...");
-    }
-
-    private void processTXT(String fileName) {
-        LOG.info("Processing TXT...");
-    }
-
 }
 
 
